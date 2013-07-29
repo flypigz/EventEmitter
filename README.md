@@ -1,5 +1,17 @@
 Node.js inspired EventEmitter for objective c.
 
+
+# Enhancement
+
+Enable NSObject connect to a specific Event Emitter
+- (void)on:(NSString*)event sender:(id)sender notify:(EventEmitterNotifyCallback)callback;
+- (void)on:(NSString*)event sender:(id)sender callback:(EventEmitterDefaultCallback)callback;
+- (void)on:(NSString*)event sender:(id)sender array:(EventEmitterArrayCallback)callback;
+- (void)once:(NSString*)event sender:(id)sender notify:(EventEmitterNotifyCallback)callback;
+- (void)once:(NSString*)event sender:(id)sender callback:(EventEmitterDefaultCallback)callback;
+- (void)once:(NSString*)event sender:(id)sender array:(EventEmitterArrayCallback)callback;
+
+
 ## Use it
 
 Copy the EventEmitter class into your project or add this line to your Podfile
