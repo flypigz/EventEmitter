@@ -19,6 +19,33 @@
 
 @implementation EventEmitterTests
 
+- (void)testTowObjectsNotify {
+	__block int i = 0;
+	NSObject* emitter = [[NSObject alloc] init];
+    
+    NSObject* listener = [[NSObject alloc] init];
+	[listener on:@"key" sender:emitter notify:^() {
+		i++;
+	}];
+    
+	[emitter emit:@"key"];
+    
+    
+    __block int j = 0;
+    NSObject* listener2 = [[NSObject alloc] init];
+	[listener2 on:@"key" sender:emitter notify:^() {
+		j++;
+	}];
+    
+	[emitter emit:@"key"];
+    
+    STAssertEquals((int)[[emitter listeners] count], 2, @"");
+    STAssertEquals((int)[[emitter listeners:@"key"] count], 2, @"");
+    
+	STAssertEquals(i, 2, @"");
+    STAssertEquals(j, 1, @"");
+}
+
 - (void)testSimplestOnNotify {
 	__block int i = 0;
 	NSObject* emitter = [[NSObject alloc] init];
